@@ -1,5 +1,6 @@
 package br.tcc.unicid.photostamp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -81,16 +82,20 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Intent it = new Intent(Home.this, photo.class);
+            startActivity(it);
         } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            Intent it = new Intent(Home.this, photo_check.class);
+            startActivity(it);
+        } else if (id == R.id.nav_tema) {
+            Intent it = new Intent(Home.this, theme.class);
+            startActivity(it);
+        } else if (id == R.id.nav_grid) {
+            Intent it = new Intent(Home.this, grid.class);
+            startActivity(it);
+        } else if (id == R.id.nav_mural) {
+            Intent it = new Intent(Home.this, mural_photo.class);
+            startActivity(it);
 
         }
 

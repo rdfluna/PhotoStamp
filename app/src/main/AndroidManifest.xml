@@ -19,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login_user" />
+        <activity android:name=".sign_up" />
+        <activity android:name=".forgot_password" />
+        <activity android:name=".photo" />
+        <activity android:name=".photo_check" />
+        <activity android:name=".theme" />
+        <activity android:name=".grid" />
+        <activity android:name=".mural_photo"></activity>
     </application>
 
 </manifest>
