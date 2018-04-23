@@ -12,11 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
-import br.tcc.unicid.photostamp.contract.DaggerUserComponent;
-import br.tcc.unicid.photostamp.contract.UserComponent;
+import br.tcc.unicid.photostamp.contract.AppComponent;
+import br.tcc.unicid.photostamp.model.BLL.EventBll;
 import br.tcc.unicid.photostamp.model.BLL.UserBll;
 import br.tcc.unicid.photostamp.module.UserModule;
 

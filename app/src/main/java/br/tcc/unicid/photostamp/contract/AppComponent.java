@@ -1,5 +1,6 @@
 package br.tcc.unicid.photostamp.contract;
 
+import br.tcc.unicid.photostamp.Home;
 import br.tcc.unicid.photostamp.model.BLL.EventBll;
 import br.tcc.unicid.photostamp.model.BLL.GalleryWallBll;
 import br.tcc.unicid.photostamp.model.BLL.GridBll;
@@ -26,11 +27,12 @@ import dagger.Component;
         UserModule.class
     })
 public interface AppComponent {
-    EventBll provideEvent();
-    GalleryWallBll provideGalleryWall();
-    GridBll provideGrid();
-    PhotoBll providePhoto();
-    TagBll provideTag();
-    ThemeBll provideTheme();
-    UserBll provideUser();
+    public void inject(Home activity);//quem pode utilizar esse módulos
+    //EventBll provideEvent();
+    //GalleryWallBll provideGalleryWall();
+    //GridBll provideGrid();
+    //PhotoBll providePhoto();
+    //TagBll provideTag();
+    //ThemeBll provideTheme();
+    //UserBll provideUser();
 }

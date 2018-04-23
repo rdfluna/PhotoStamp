@@ -24,13 +24,13 @@ public class MainApplication extends Application {
     private void initDagger() {
         component = DaggerAppComponent
                 .builder()
-                .eventModule(new EventModule())
-                .galleryWallModule(new GalleryWallModule())
-                .gridModule(new GridModule())
-                .photoModule(new PhotoModule())
-                .tagModule(new TagModule())
-                .themeModule(new ThemeModule())
-                .userModule(new UserModule())
+                //.eventModule(new EventModule())
+                //.galleryWallModule(new GalleryWallModule())
+                //.gridModule(new GridModule())
+                //.photoModule(new PhotoModule())
+                //.tagModule(new TagModule())
+                //.themeModule(new ThemeModule())
+                //.userModule(new UserModule())
                 .build();
     }
 
