@@ -102,7 +102,7 @@ public class Home extends AppCompatActivity
             Intent it = new Intent(Home.this, grid.class);
             startActivity(it);
         } else if (id == R.id.nav_mural) {
-            Intent it = new Intent(Home.this, mural_photo.class);
+            Intent it = new Intent(Home.this, Tela_menu.class);
             startActivity(it);
 
         }

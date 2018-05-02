@@ -7,4 +7,5 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_sign_up">sign_up</string>
+    <string name="title_activity_tela_menu">Tela_menu</string>
 </resources>

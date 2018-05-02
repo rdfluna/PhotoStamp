@@ -27,7 +27,11 @@
         <activity android:name=".photo_check" />
         <activity android:name=".theme" />
         <activity android:name=".grid" />
-        <activity android:name=".mural_photo"></activity>
+        <activity android:name=".mural_photo" />
+        <activity
+            android:name=".Tela_menu"
+            android:label="@string/title_activity_tela_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
