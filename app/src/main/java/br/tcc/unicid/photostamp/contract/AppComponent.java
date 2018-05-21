@@ -8,6 +8,7 @@ import br.tcc.unicid.photostamp.model.BLL.PhotoBll;
 import br.tcc.unicid.photostamp.model.BLL.TagBll;
 import br.tcc.unicid.photostamp.model.BLL.ThemeBll;
 import br.tcc.unicid.photostamp.model.BLL.UserBll;
+import br.tcc.unicid.photostamp.module.ContextModule;
 import br.tcc.unicid.photostamp.module.EventModule;
 import br.tcc.unicid.photostamp.module.GalleryWallModule;
 import br.tcc.unicid.photostamp.module.GridModule;
@@ -18,6 +19,7 @@ import br.tcc.unicid.photostamp.module.UserModule;
 import dagger.Component;
 
 @Component(modules = {
+        ContextModule.class,
         EventModule.class,
         GalleryWallModule.class,
         GridModule.class,

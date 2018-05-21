@@ -1,6 +1,11 @@
 package br.tcc.unicid.photostamp.module;
 
+import android.content.Context;
+
+import javax.inject.Inject;
+
 import br.tcc.unicid.photostamp.model.BLL.PhotoBll;
+import br.tcc.unicid.photostamp.model.DAL.Database;
 import br.tcc.unicid.photostamp.model.DAL.IPhotoDal;
 import br.tcc.unicid.photostamp.model.DAL.PhotoDB;
 import dagger.Module;
@@ -9,8 +14,9 @@ import dagger.Provides;
 @Module
 public class PhotoModule {
     @Provides
-    IPhotoDal provideDal(){
-        return new PhotoDB();
+    @Inject
+    IPhotoDal provideDal(Context context){
+        return new PhotoDB(new Database(context));
     }
 
     @Provides

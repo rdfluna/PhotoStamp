@@ -1,8 +1,16 @@
 package br.tcc.unicid.photostamp.model.DAL;
 
+import javax.inject.Inject;
+
 import br.tcc.unicid.photostamp.model.DTO.GalleryWall;
 
 public class GalleryWallDB implements IGalleryWallDal {
+	private Database DB;
+
+	@Inject
+	public GalleryWallDB(Database DB){
+		this.DB = DB;
+	}
 
 	@Override
 	public GalleryWall Get(int userID) {

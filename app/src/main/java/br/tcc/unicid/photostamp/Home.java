@@ -18,12 +18,17 @@ import android.widget.Toast;
 import javax.inject.Inject;
 
 import br.tcc.unicid.photostamp.contract.AppComponent;
+//import br.tcc.unicid.photostamp.contract.DaggerAppComponent;
 import br.tcc.unicid.photostamp.model.BLL.EventBll;
+import br.tcc.unicid.photostamp.model.BLL.PhotoBll;
 import br.tcc.unicid.photostamp.model.BLL.UserBll;
 import br.tcc.unicid.photostamp.module.UserModule;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @Inject
+    PhotoBll photoBll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,10 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MainApplication.getComponent().inject(this);
+        //boolean b = photoBll.Delete(1, 2);
+        //Toast.makeText(getApplicationContext(), "BD funcionou: " + b, Toast.LENGTH_LONG).show();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

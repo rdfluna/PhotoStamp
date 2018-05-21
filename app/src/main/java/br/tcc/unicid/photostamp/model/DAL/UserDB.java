@@ -1,11 +1,20 @@
 package br.tcc.unicid.photostamp.model.DAL;
 
+import javax.inject.Inject;
+
 import br.tcc.unicid.photostamp.model.DTO.GalleryWall;
 import br.tcc.unicid.photostamp.model.DTO.Grid;
 import br.tcc.unicid.photostamp.model.DTO.Theme;
 import br.tcc.unicid.photostamp.model.DTO.User;
 
 public class UserDB implements IUserDal {
+	private Database DB;
+
+	@Inject
+	public UserDB(Database DB){
+		this.DB = DB;
+	}
+
 	@Override
 	public User Get(int id) {
 		return null;

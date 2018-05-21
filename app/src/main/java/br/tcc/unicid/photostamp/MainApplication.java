@@ -4,6 +4,7 @@ import android.app.Application;
 
 import br.tcc.unicid.photostamp.contract.AppComponent;
 import br.tcc.unicid.photostamp.contract.DaggerAppComponent;
+import br.tcc.unicid.photostamp.module.ContextModule;
 import br.tcc.unicid.photostamp.module.EventModule;
 import br.tcc.unicid.photostamp.module.GalleryWallModule;
 import br.tcc.unicid.photostamp.module.GridModule;
@@ -24,13 +25,7 @@ public class MainApplication extends Application {
     private void initDagger() {
         component = DaggerAppComponent
                 .builder()
-                //.eventModule(new EventModule())
-                //.galleryWallModule(new GalleryWallModule())
-                //.gridModule(new GridModule())
-                //.photoModule(new PhotoModule())
-                //.tagModule(new TagModule())
-                //.themeModule(new ThemeModule())
-                //.userModule(new UserModule())
+                .contextModule(new ContextModule(getApplicationContext()))
                 .build();
     }
 
