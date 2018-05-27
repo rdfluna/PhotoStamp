@@ -5,13 +5,13 @@
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home"
+            android:name=".HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,9 +29,10 @@
         <activity android:name=".grid" />
         <activity android:name=".mural_photo" />
         <activity
-            android:name=".Tela_menu"
+            android:name=".Home"
             android:label="@string/title_activity_tela_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            />
     </application>
 
 </manifest>
