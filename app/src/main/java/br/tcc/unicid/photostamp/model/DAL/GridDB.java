@@ -20,12 +20,12 @@ public class GridDB implements IGridDal {
 		this.DB = DB;
 	}
 	@Override
-	public Grid Get(int userID) {
+	public Grid Get() {
 		return null;
 	}
 
 	@Override
-	public boolean Delete(int id, int userID) {
+	public boolean Delete(int id) {
 		return false;
 	}
 

@@ -13,7 +13,7 @@ public class GalleryWallDB implements IGalleryWallDal {
 	}
 
 	@Override
-	public GalleryWall Get(int userID) {
+	public GalleryWall Get() {
 		return null;
 	}
 
@@ -28,7 +28,7 @@ public class GalleryWallDB implements IGalleryWallDal {
 	}
 
 	@Override
-	public boolean Delete(int id, int userID) {
+	public boolean Delete(int id) {
 		return false;
 	}
 }

@@ -12,8 +12,8 @@ public class GalleryWallBll {
 		this.Dal = dal;
 	}
 
-	public GalleryWall Get(int userID) {
-		return Dal.Get(userID);
+	public GalleryWall Get() {
+		return Dal.Get();
 	}
 
 	public boolean Insert(GalleryWall gallery) {
@@ -24,7 +24,7 @@ public class GalleryWallBll {
 		return Dal.Update(gallery);
 	}
 
-	public boolean Delete(int id, int userID) {
-		return Dal.Delete(id, userID);
+	public boolean Delete(int id) {
+		return Dal.Delete(id);
 	}
 }

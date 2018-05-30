@@ -13,7 +13,7 @@ public interface IUserDal {
 
 	boolean Update(User user);
 
-	boolean Delete(int id, int userID);
+	boolean Delete(int id);
 
 	boolean UpdateTheme(int id, Theme theme);
 

@@ -13,12 +13,12 @@ public class TagBll {
 		this.Dal = dal;
 	}
 
-	public Tag GetByID(int id, int userID) {
-		return Dal.GetByID(id, userID);
+	public Tag GetByID(int id) {
+		return Dal.GetByID(id);
 	}
 
-	public ArrayList<Tag> Get(int userID) {
-		return Dal.Get(userID);
+	public ArrayList<Tag> Get() {
+		return Dal.Get();
 	}
 
 	public boolean Insert(Tag tag) {
@@ -29,7 +29,7 @@ public class TagBll {
 		return Dal.Update(tag);
 	}
 
-	public boolean Delete(int id, int userID) {
-		return Dal.Delete(id, userID);
+	public boolean Delete(int id) {
+		return Dal.Delete(id);
 	}
 }

@@ -24,7 +24,7 @@ public class TagDB implements ITagDal {
 	}
 
 	@Override
-	public Tag GetByID(int id, int userID) {
+	public Tag GetByID(int id) {
 		connection = DB.getReadableDatabase();
 
 		String selectQuery = "SELECT  * FROM " + TABLE + " WHERE ID = " + id;
@@ -38,13 +38,12 @@ public class TagDB implements ITagDal {
 		Tag tag = new Tag();
 		tag.setID(id);
 		tag.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-		//tag.setDate(cursor.getString(cursor.getColumnIndex("PATH")));
 
 		return tag;
 	}
 
 	@Override
-	public ArrayList<Tag> Get(int userID) {
+	public ArrayList<Tag> Get() {
 		ArrayList<Tag> tags = new ArrayList<Tag>();
 		String selectQuery = "SELECT  * FROM " + TABLE;
 
@@ -107,7 +106,7 @@ public class TagDB implements ITagDal {
 	}
 
 	@Override
-	public boolean Delete(int id, int userID) {
+	public boolean Delete(int id) {
 
 		connection = DB.getReadableDatabase();
 		int result = connection.delete(TABLE, "ID = " + id,null);

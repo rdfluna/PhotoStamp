@@ -31,7 +31,7 @@ public class UserDB implements IUserDal {
 	}
 
 	@Override
-	public boolean Delete(int id, int userID) {
+	public boolean Delete(int id) {
         return  false;
 	}
 

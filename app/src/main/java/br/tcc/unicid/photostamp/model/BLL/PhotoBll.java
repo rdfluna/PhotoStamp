@@ -1,5 +1,9 @@
 package br.tcc.unicid.photostamp.model.BLL;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import br.tcc.unicid.photostamp.model.DAL.IPhotoDal;
@@ -18,16 +22,28 @@ public class PhotoBll {
 		return Dal.GetByID(id);
 	}
 
-	public ArrayList<Photo> Get(int userID) {
-		return Dal.Get(userID);
+	public ArrayList<Photo> Get() {
+		return Dal.Get();
 	}
 
-	public boolean Insert(Photo photo) {
+
+	public boolean Insert(Bitmap imageBitmap) {
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+		byte imagemBytes[] = stream.toByteArray();
+
+		Photo photo = new Photo();
+		photo.setName("Teste");
+		photo.setExtention(".JPG");
+		photo.setImage(imagemBytes);
+		photo.setSize(4);
+		photo.setPath("/");
+
 		return Dal.Insert(photo);
 	}
 
-	public boolean Delete(int id, int userID) {
-		return Dal.Delete(id, userID);
+	public boolean Delete(int id) {
+		return Dal.Delete(id);
 	}
 
 	public boolean UpdateTag(int id, Tag tag) {

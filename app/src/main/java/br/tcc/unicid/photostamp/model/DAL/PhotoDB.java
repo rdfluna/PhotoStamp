@@ -42,12 +42,13 @@ public class PhotoDB implements IPhotoDal {
 		photo.setName(cursor.getString(cursor.getColumnIndex("NAME")));
 		photo.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
 		photo.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
+		photo.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
 
 		return photo;
 	}
 
 	@Override
-	public ArrayList<Photo> Get(int userID) {
+	public ArrayList<Photo> Get() {
 		ArrayList<Photo> photos = new ArrayList<Photo>();
 		String selectQuery = "SELECT  * FROM " + TABLE;
 
@@ -63,6 +64,7 @@ public class PhotoDB implements IPhotoDal {
 				ph.setName(cursor.getString(cursor.getColumnIndex("NAME")));
 				ph.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
 				ph.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
+				ph.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
 
 				photos.add(ph);
 			} while (cursor.moveToNext());
@@ -82,6 +84,7 @@ public class PhotoDB implements IPhotoDal {
 		values.put("SIZE", photo.getSize());
 		values.put("EXTENTION", photo.getExtention());
 		values.put("PATH", photo.getPath());
+		values.put("IMAGE", photo.getImage());
 		values.put("DATE", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
 		result = connection.insert(TABLE, null, values);
@@ -96,7 +99,7 @@ public class PhotoDB implements IPhotoDal {
 	}
 
 	@Override
-	public boolean Delete(int id, int userID) {
+	public boolean Delete(int id) {
 		connection = DB.getReadableDatabase();
 		int result = connection.delete(TABLE, "ID = " + id,null);
 		connection.close();

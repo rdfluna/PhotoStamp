@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Tag {
     private int ID;
-    private int userID;
     private String name;
     private Date date;
 
@@ -14,14 +13,6 @@ public class Tag {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getName() {

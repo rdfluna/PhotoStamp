@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Photo {
     private int ID;
-    private int userID;
     private String name;
     private String path;
     private ArrayList<Tag> tags;
@@ -13,20 +12,14 @@ public class Photo {
     private int size;
     private Date dateModificaiton;
 
+    private byte[] image;
+
     public int getID() {
         return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getName() {
@@ -75,5 +68,13 @@ public class Photo {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

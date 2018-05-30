@@ -32,6 +32,7 @@ public class Database extends SQLiteOpenHelper {
             "	ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "	NAME VARCHAR(100)," +
             "	PATH VARCHAR(100)," +
+            "	IMAGE BLOB," +
             "	EXTENTION VARCHAR(10)," +
             "	SIZE INTEGER," +
             "	DATE DATETIME" +

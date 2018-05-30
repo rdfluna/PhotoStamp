@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Grid {
     private int ID;
-    private int userID;
     private ArrayList<Photo> photos;
     private ArrayList<Tag> tags;
     private int order;
@@ -15,14 +14,6 @@ public class Grid {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public ArrayList<Photo> getPhotos() {

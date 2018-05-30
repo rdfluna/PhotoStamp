@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import br.tcc.unicid.photostamp.model.DTO.Tag;
 
 public interface ITagDal {
-	Tag GetByID(int id, int userID);
+	Tag GetByID(int id);
 
-	ArrayList<Tag> Get(int userID);
+	ArrayList<Tag> Get();
 
 	boolean Insert(Tag tag);
 
 	boolean Update(Tag tag);
 
-	boolean Delete(int id, int userID);
+	boolean Delete(int id);
 }

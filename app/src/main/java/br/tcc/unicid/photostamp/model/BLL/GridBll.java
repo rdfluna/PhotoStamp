@@ -12,8 +12,8 @@ public class GridBll {
 		this.Dal = dal;
 	}
 
-	public Grid Get(int userID) {
-		return Dal.Get(userID);
+	public Grid Get() {
+		return Dal.Get();
 	}
 
 	public boolean Insert(Grid grid) {
@@ -24,7 +24,7 @@ public class GridBll {
 		return Dal.Update(grid);
 	}
 
-	public boolean Delete(int id, int userID) {
-		return Dal.Delete(id, userID);
+	public boolean Delete(int id) {
+		return Dal.Delete(id);
 	}
 }

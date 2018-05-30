@@ -8,13 +8,24 @@
     tools:context=".Home"
     tools:showIn="@layout/app_bar_home">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imFotos"
+        android:layout_width="237dp"
+        android:layout_height="311dp"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:srcCompat="@android:color/background_dark"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="71dp" />
+
+    <Button
+        android:id="@+id/btnFotos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Button"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="412dp"
+        tools:text="Foto" />
 
 </android.support.constraint.ConstraintLayout>

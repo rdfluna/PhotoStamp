@@ -24,8 +24,8 @@ public class UserBll {
 		return Dal.Update(user);
 	}
 
-	public boolean Delete(int id, int userID) {
-		return Dal.Delete(id, userID);
+	public boolean Delete(int id) {
+		return Dal.Delete(id);
 	}
 
 	public boolean UpdateTheme(int id, Theme theme) {
