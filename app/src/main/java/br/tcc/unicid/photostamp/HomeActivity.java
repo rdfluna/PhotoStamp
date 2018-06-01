@@ -15,11 +15,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,10 +31,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.robertlevonyan.views.chip.Chip;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -61,16 +69,14 @@ public class HomeActivity extends AppCompatActivity
 
     private  ImageView imagem;
     private final int TIRAR_FOTO = 1;
-    TextView mItemSelected;
-    String[] listItems;
-    boolean[] checkedItems;
-    ArrayList<Integer> mUserItems = new ArrayList<>();
-
+    private ConstraintLayout constraintLayout;
+    private AutoCompleteTextView complete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        constraintLayout = findViewById(R.id.constraintLayoutHome);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,39 +112,47 @@ public class HomeActivity extends AppCompatActivity
             Bundle extras = data.getExtras();
             photoBll.Insert((Bitmap) extras.get("data"));
             ArrayList<Photo> photos = photoBll.Get();
-            ByteArrayInputStream imageStream = new ByteArrayInputStream(photos.get(0).getImage());
+            String[] tags = tagBll.Get();
+
+            ByteArrayInputStream imageStream = new ByteArrayInputStream(photos.get(photos.size() - 1).getImage());
             Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
             imagem.setImageBitmap(imageBitmap);
 
-            mItemSelected = (TextView) findViewById(R.id.tvItemSelected);
+            complete = findViewById(R.id.autocomplete);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tags);
+            complete.setAdapter(adapter);
+            complete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            listItems = new String[]{"Carro", "Viagem", "Gato", "Show"};
-            checkedItems = new boolean[listItems.length];
-
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-            AlertDialog.Builder builder = mBuilder.setTitle("Deseja fazer uma marcação? ");
-            mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int position, boolean isChecked) {
-                    if(isChecked){
-                        mUserItems.add(position);
-                    }else{
-                        mUserItems.remove((Integer.valueOf(position)));
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                    AddChip();
+                }
+
+            });
+            complete.setOnKeyListener(new View.OnKeyListener() {
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    // If the event is a key-down event on the "enter" button
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        AddChip();
+                        return true;
                     }
+                    return false;
                 }
             });
 
-            mBuilder.setCancelable(false);
-            mBuilder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int which) {
-                    dialogInterface.dismiss();
-                }
-            });
-
-            AlertDialog mDialog = mBuilder.create();
-            mDialog.show();
         }
+    }
+
+    private void AddChip()
+    {
+        Chip chip = new Chip(getApplicationContext());
+        chip.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT));
+        chip.setPadding(50, 50, 50, 50);
+        chip.setChipText(complete.getText().toString());
+        complete.setText("");
+        constraintLayout.addView(chip);
     }
 
     @Override

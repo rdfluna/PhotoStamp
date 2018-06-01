@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Home"
-    tools:showIn="@layout/app_bar_home">
+    tools:context=".HomeActivity"
+    tools:showIn="@layout/app_bar_home"
+    android:id="@+id/constraintLayoutHome">
 
     <ImageView
         android:id="@+id/imFotos"
@@ -15,8 +16,8 @@
         android:scaleType="center"
         android:visibility="visible"
         app:srcCompat="@android:color/background_dark"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="71dp" />
+        tools:layout_editor_absoluteX="1000dp"
+        tools:layout_editor_absoluteY="1000dp" />
 
     <Button
         android:id="@+id/btnFotos"
@@ -24,17 +25,14 @@
         android:layout_height="wrap_content"
         android:text="Button"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="412dp"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="400dp"
         tools:text="Foto" />
 
-    <TextView
-        android:id="@+id/tvItemSelected"
-        android:layout_width="206dp"
-        android:layout_height="84dp"
-        android:text="TextView"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="384dp" />
+    <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/autocomplete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"/>
 
 </android.support.constraint.ConstraintLayout>

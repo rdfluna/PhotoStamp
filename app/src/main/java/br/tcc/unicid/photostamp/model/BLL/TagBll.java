@@ -17,8 +17,16 @@ public class TagBll {
 		return Dal.GetByID(id);
 	}
 
-	public ArrayList<Tag> Get() {
-		return Dal.Get();
+	public String[] Get() {
+		ArrayList<Tag> tags = Dal.Get();
+		String[] tagsString = new String[tags.size()];
+
+		for (int i = 0; i < tags.size(); i++) {
+			tagsString[i] = tags.get(i).getName();
+		}
+
+		return new String[]{"Carro", "Coelho", "Show", "Viagem"};
+		//return  tagsString;
 	}
 
 	public boolean Insert(Tag tag) {

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="br.tcc.unicid.photostamp">
 
-    <application
+    <application tools:replace="android:icon"
         android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_icon2"
@@ -11,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeActivity"
+            android:name=".LoadingActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,15 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login_user" />
-        <activity android:name=".sign_up" />
-        <activity android:name=".forgot_password" />
-        <activity android:name=".photo_check" />
-        <activity android:name=".theme" />
-        <activity android:name=".grid" />
-        <activity android:name=".mural_photo" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SingUpActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".TagActivity" />
+        <activity android:name=".ThemeActivity" />
+        <activity android:name=".GridActivity" />
+        <activity android:name=".GalleryWallActivity" />
         <activity
-            android:name=".Home"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_tela_menu"
             android:theme="@style/AppTheme.NoActionBar"
             />
