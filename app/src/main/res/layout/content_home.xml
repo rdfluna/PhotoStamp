@@ -28,4 +28,13 @@
         tools:layout_editor_absoluteY="412dp"
         tools:text="Foto" />
 
+    <TextView
+        android:id="@+id/tvItemSelected"
+        android:layout_width="206dp"
+        android:layout_height="84dp"
+        android:text="TextView"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="384dp" />
+
 </android.support.constraint.ConstraintLayout>
