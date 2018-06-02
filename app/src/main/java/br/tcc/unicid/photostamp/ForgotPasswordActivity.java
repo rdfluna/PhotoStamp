@@ -3,7 +3,14 @@ package br.tcc.unicid.photostamp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class forgot_password extends AppCompatActivity {
+import javax.inject.Inject;
+
+import br.tcc.unicid.photostamp.model.BLL.UserBll;
+
+public class ForgotPasswordActivity extends AppCompatActivity {
+
+    @Inject
+    UserBll userBll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

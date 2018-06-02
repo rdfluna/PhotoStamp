@@ -1,6 +1,13 @@
 package br.tcc.unicid.photostamp.contract;
 
-import br.tcc.unicid.photostamp.Home;
+import br.tcc.unicid.photostamp.ForgotPasswordActivity;
+import br.tcc.unicid.photostamp.GalleryWallActivity;
+import br.tcc.unicid.photostamp.GridActivity;
+import br.tcc.unicid.photostamp.HomeActivity;
+import br.tcc.unicid.photostamp.LoginActivity;
+import br.tcc.unicid.photostamp.SingUpActivity;
+import br.tcc.unicid.photostamp.TagActivity;
+import br.tcc.unicid.photostamp.ThemeActivity;
 import br.tcc.unicid.photostamp.model.BLL.EventBll;
 import br.tcc.unicid.photostamp.model.BLL.GalleryWallBll;
 import br.tcc.unicid.photostamp.model.BLL.GridBll;
@@ -29,12 +36,12 @@ import dagger.Component;
         UserModule.class
     })
 public interface AppComponent {
-    public void inject(Home activity);//quem pode utilizar esse módulos
-    //EventBll provideEvent();
-    //GalleryWallBll provideGalleryWall();
-    //GridBll provideGrid();
-    //PhotoBll providePhoto();
-    //TagBll provideTag();
-    //ThemeBll provideTheme();
-    //UserBll provideUser();
+    public void inject(HomeActivity activity);
+    public void inject(ForgotPasswordActivity activity);
+    public void inject(GalleryWallActivity activity);
+    public void inject(GridActivity activity);
+    public void inject(LoginActivity activity);
+    public void inject(SingUpActivity activity);
+    public void inject(TagActivity activity);
+    public void inject(ThemeActivity activity);
 }
