@@ -16,7 +16,7 @@
         android:visibility="visible"
         app:srcCompat="@android:color/background_dark"
         tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="71dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/btnFotos"
@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:text="Button"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="412dp"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="461dp"
         tools:text="Foto" />
 
 </android.support.constraint.ConstraintLayout>

@@ -2,8 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_description"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Descrição"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_data"
+        android:orderInCategory="100"
+        android:title="Data"
+        app:showAsAction="never" />
+
+
 </menu>

@@ -55,6 +55,21 @@ public class Home extends AppCompatActivity
     private final int TIRAR_FOTO = 1;
 
 
+    //onclick do menu login para entrar no sistema
+    public void entrar (View view){
+        setContentView(R.layout.activity_login_user);
+    }
+
+    //forgot password
+    public void esqSenha(View view){
+        setContentView(R.layout.activity_forgot_password);
+    }
+
+    //sign up
+    public void Cadastro (View view){
+        setContentView(R.layout.activity_sign_up);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +142,7 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_description) {
             return true;
         }
 
@@ -152,10 +167,6 @@ public class Home extends AppCompatActivity
         } else if (id == R.id.nav_grid) {
             Intent it = new Intent(Home.this, grid.class);
             startActivity(it);
-        } else if (id == R.id.nav_mural) {
-            Intent it = new Intent(Home.this, Tela_menu.class);
-            startActivity(it);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
