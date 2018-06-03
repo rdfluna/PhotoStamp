@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,17 +13,19 @@
         android:layout_marginRight="0dp"
         android:layout_marginLeft="0dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp" >
+
+    </SearchView>
 
     <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="437dp"
         android:layout_marginTop="75dp"
-        android:verticalSpacing="0dp"
         android:horizontalSpacing="0dp"
+        android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:numColumns="2"/>
+        android:verticalSpacing="0dp" />
 
 
 

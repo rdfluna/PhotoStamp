@@ -14,33 +14,20 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="51dp"
+        android:layout_width="69dp"
         android:layout_height="81dp"
         android:contentDescription="@string/nav_header_desc"
+        android:onClick="Login"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/person" />
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingTop="@dimen/nav_header_vertical_spacing"-->
-        <!--android:text="Olá, Mundo!"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/nav_header_subtitle" />-->
 
     <TextView
         android:id="@+id/loginView"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:layout_marginLeft="12dp"
         android:text="Login"
-        android:onClick="entrar"
-
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
 

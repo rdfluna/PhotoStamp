@@ -29,7 +29,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -54,23 +58,6 @@ public class Home extends AppCompatActivity
     private  ImageView imagem;
     private final int TIRAR_FOTO = 1;
 
-
-    //onclick do menu login para entrar no sistema
-    public void entrar (View view){
-        setContentView(R.layout.activity_login_user);
-    }
-
-    //forgot password
-    public void esqSenha(View view){
-        setContentView(R.layout.activity_forgot_password);
-    }
-
-    //sign up
-    public void Cadastro (View view){
-        setContentView(R.layout.activity_sign_up);
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +65,7 @@ public class Home extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        MainApplication.getComponent().inject(this);
+        MainApplication.getComponent().inject(Home.this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,6 +75,7 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         imagem = (ImageView) findViewById(R.id.imFotos);
         Button foto = (Button) findViewById(R.id.btnFotos);
@@ -149,6 +136,8 @@ public class Home extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -156,16 +145,16 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent it = new Intent(Home.this, photo.class);
+            Intent it = new Intent(Home.this, HomeActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_gallery) {
-            Intent it = new Intent(Home.this, photo_check.class);
+            Intent it = new Intent(Home.this, TagActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_tema) {
-            Intent it = new Intent(Home.this, theme.class);
+            Intent it = new Intent(Home.this, ThemeActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_grid) {
-            Intent it = new Intent(Home.this, grid.class);
+            Intent it = new Intent(Home.this, GridActivity.class);
             startActivity(it);
         }
 

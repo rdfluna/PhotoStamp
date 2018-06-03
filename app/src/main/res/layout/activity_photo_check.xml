@@ -6,19 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".TagActivity">
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="263dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="221dp"
-        android:text="Pendentes"
-        android:textColor="#9b1a1a"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <GridView
+       android:id="@+id/gridView"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:columnWidth="100dp"
+       android:numColumns="auto_fit"
+       android:horizontalSpacing="10dp"
+       android:stretchMode="columnWidth"
+       android:gravity="center"
+   />
+
 </android.support.constraint.ConstraintLayout>

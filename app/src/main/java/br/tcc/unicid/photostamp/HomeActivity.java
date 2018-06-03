@@ -91,6 +91,7 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         imagem = (ImageView) findViewById(R.id.imFotos);
         Button foto = (Button) findViewById(R.id.btnFotos);
@@ -144,6 +145,11 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+    //onclick do menu login para entrar no sistema
+    public void Login (View view){
+        setContentView(R.layout.activity_login_user);
+    }
+
     private void AddChip()
     {
         Chip chip = new Chip(getApplicationContext());
@@ -180,7 +186,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_description) {
             return true;
         }
 
@@ -205,10 +211,6 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_grid) {
             Intent it = new Intent(HomeActivity.this, GridActivity.class);
             startActivity(it);
-        } else if (id == R.id.nav_mural) {
-            Intent it = new Intent(HomeActivity.this, GalleryWallActivity.class);
-            startActivity(it);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

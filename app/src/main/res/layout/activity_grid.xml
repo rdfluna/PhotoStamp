@@ -6,20 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".GridActivity">
 
-    <com.robertlevonyan.views.chip.Chip
-        android:id="@+id/chip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="263dp"
-        android:layout_marginEnd="185dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="221dp"
-        app:mcv_chipText="Grid"
-        android:textColor="#9b1a1a"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--<com.robertlevonyan.views.chip.Chip-->
+        <!--android:id="@+id/chip"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="263dp"-->
+        <!--android:layout_marginEnd="185dp"-->
+        <!--android:layout_marginStart="162dp"-->
+        <!--android:layout_marginTop="221dp"-->
+        <!--app:mcv_chipText="Grid"-->
+        <!--android:textColor="#9b1a1a"-->
+        <!--android:textSize="20sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <SearchView
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="350dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+
+    </SearchView>
+
+
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="437dp"
+        android:horizontalSpacing="0dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+
 
 </android.support.constraint.ConstraintLayout>

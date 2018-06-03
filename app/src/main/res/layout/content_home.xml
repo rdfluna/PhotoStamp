@@ -11,38 +11,88 @@
 
     <ImageView
         android:id="@+id/imFotos"
-        android:layout_width="237dp"
-        android:layout_height="311dp"
-        android:scaleType="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="150dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/ic_photo_camera_black_24dp"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
         android:visibility="visible"
-        app:srcCompat="@android:color/background_dark"
-<<<<<<< HEAD
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="16dp" />
-=======
-        tools:layout_editor_absoluteX="1000dp"
-        tools:layout_editor_absoluteY="1000dp" />
->>>>>>> 91f663c55d45175f9847e28863753a0126f55e44
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnFotos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="58dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:drawableBottom="@drawable/ic_add_a_photo_black_24dp"
         android:visibility="visible"
-<<<<<<< HEAD
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="461dp"
-=======
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="400dp"
->>>>>>> 91f663c55d45175f9847e28863753a0126f55e44
-        tools:text="Foto" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete" />
+
+    <Button
+        android:id="@+id/slvFotos"
+        android:layout_width="58dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+
+        android:drawableBottom="@drawable/ic_check_black_24dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <Button
+        android:id="@+id/excFotos"
+        android:layout_width="58dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:drawableBottom="@drawable/ic_close_black_24dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete"
+        app:layout_constraintVertical_bias="0.833" />
+
+
 
     <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/autocomplete"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnFotos"
+        app:layout_constraintTop_toBottomOf="@+id/imFotos"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

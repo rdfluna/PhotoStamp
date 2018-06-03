@@ -3,6 +3,7 @@ package br.tcc.unicid.photostamp.contract;
 import br.tcc.unicid.photostamp.ForgotPasswordActivity;
 import br.tcc.unicid.photostamp.GalleryWallActivity;
 import br.tcc.unicid.photostamp.GridActivity;
+import br.tcc.unicid.photostamp.Home;
 import br.tcc.unicid.photostamp.HomeActivity;
 import br.tcc.unicid.photostamp.LoginActivity;
 import br.tcc.unicid.photostamp.SingUpActivity;
@@ -44,4 +45,6 @@ public interface AppComponent {
     public void inject(SingUpActivity activity);
     public void inject(TagActivity activity);
     public void inject(ThemeActivity activity);
+
+    void inject(Home home);
 }

@@ -20,5 +20,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    //forgot password
+    public void Forgot_password (View view){
+        setContentView(R.layout.activity_forgot_password);
+    }
 
+    //sign up
+    public void Sign_up (View view){
+        setContentView(R.layout.activity_sign_up);
+    }
 }
