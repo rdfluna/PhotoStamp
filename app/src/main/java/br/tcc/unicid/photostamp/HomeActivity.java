@@ -20,6 +20,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,6 +33,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -40,7 +43,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.view.inputmethod.EditorInfo;
+import android.view.KeyEvent;
+
 import com.robertlevonyan.views.chip.Chip;
+import com.robertlevonyan.views.chip.OnCloseClickListener;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -48,7 +55,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import br.tcc.unicid.photostamp.contract.AppComponent;
-//import br.tcc.unicid.photostamp.contract.DaggerAppComponent;
+import br.tcc.unicid.photostamp.contract.DaggerAppComponent;
 import br.tcc.unicid.photostamp.model.BLL.EventBll;
 import br.tcc.unicid.photostamp.model.BLL.PhotoBll;
 import br.tcc.unicid.photostamp.model.BLL.TagBll;
@@ -69,14 +76,15 @@ public class HomeActivity extends AppCompatActivity
 
     private  ImageView imagem;
     private final int TIRAR_FOTO = 1;
-    private ConstraintLayout constraintLayout;
+    private LinearLayout linearLayout;
     private AutoCompleteTextView complete;
+    private int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        constraintLayout = findViewById(R.id.constraintLayoutHome);
+        linearLayout = findViewById(R.id.layoutTag);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -130,18 +138,25 @@ public class HomeActivity extends AppCompatActivity
                 }
 
             });
-            complete.setOnKeyListener(new View.OnKeyListener() {
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    // If the event is a key-down event on the "enter" button
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            complete.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(s.toString().contains("\n")) {
+                        complete.setText(s.toString().replace("\n", ""));
                         AddChip();
-                        return true;
                     }
-                    return false;
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
                 }
             });
-
         }
     }
 
@@ -152,13 +167,24 @@ public class HomeActivity extends AppCompatActivity
 
     private void AddChip()
     {
-        Chip chip = new Chip(getApplicationContext());
-        chip.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT));
-        chip.setPadding(50, 50, 50, 50);
-        chip.setChipText(complete.getText().toString());
-        complete.setText("");
-        constraintLayout.addView(chip);
+        if(complete.getText().toString() != "") {
+            Chip chip = new Chip(getApplicationContext());
+            chip.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            chip.setClosable(true);
+            chip.setChipText(complete.getText().toString());
+            chip.setOnCloseClickListener(new OnCloseClickListener() {
+                @Override
+                public void onCloseClick(View v) {
+                    ViewGroup layout = (ViewGroup) v.getParent().getParent();
+                    Chip c = (Chip) v.getParent();
+                    layout.removeView(c);
+                    index--;
+                }
+            });
+            complete.setText("");
+            linearLayout.addView(chip, index++);
+        }
     }
 
     @Override

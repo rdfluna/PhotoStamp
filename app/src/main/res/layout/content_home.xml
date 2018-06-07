@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autocomplete" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutTag" />
 
     <Button
         android:id="@+id/slvFotos"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autocomplete"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTag"
         app:layout_constraintVertical_bias="0.161" />
 
     <Button
@@ -79,20 +79,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autocomplete"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTag"
         app:layout_constraintVertical_bias="0.833" />
 
 
-
-    <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/autocomplete"
+    <LinearLayout
+        android:id="@+id/layoutTag"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnFotos"
-        app:layout_constraintTop_toBottomOf="@+id/imFotos"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imFotos">
 
+        <AutoCompleteTextView
+            android:id="@+id/autocomplete"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:imeOptions="actionGo"
+            app:layout_constraintVertical_bias="1.0"/>
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
