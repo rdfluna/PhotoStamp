@@ -7,9 +7,11 @@ import br.tcc.unicid.photostamp.model.DTO.Tag;
 public interface ITagDal {
 	Tag GetByID(int id);
 
+	Tag GetByName(String name);
+
 	ArrayList<Tag> Get();
 
-	boolean Insert(Tag tag);
+	int Insert(Tag tag);
 
 	boolean Update(Tag tag);
 

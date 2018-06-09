@@ -27,7 +27,7 @@ public class PhotoBll {
 	}
 
 
-	public boolean Insert(Bitmap imageBitmap) {
+	public int Insert(Bitmap imageBitmap) {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 		byte imagemBytes[] = stream.toByteArray();

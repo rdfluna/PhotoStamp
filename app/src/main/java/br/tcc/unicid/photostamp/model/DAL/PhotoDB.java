@@ -32,17 +32,18 @@ public class PhotoDB implements IPhotoDal {
 
 		Cursor cursor = connection.rawQuery(selectQuery, null);
 
-		if (cursor != null) {
-			cursor.moveToFirst();
-		}
-
 		Photo photo = new Photo();
-		photo.setID(id);
-		photo.setExtention(cursor.getString(cursor.getColumnIndex("EXTENTION")));
-		photo.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-		photo.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
-		photo.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
-		photo.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				photo.setID(id);
+				photo.setExtention(cursor.getString(cursor.getColumnIndex("EXTENTION")));
+				photo.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+				photo.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
+				photo.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
+				photo.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
+			}
+		}
+		connection.close();
 
 		return photo;
 	}
@@ -69,12 +70,13 @@ public class PhotoDB implements IPhotoDal {
 				photos.add(ph);
 			} while (cursor.moveToNext());
 		}
+		connection.close();
 
 		return photos;
 	}
 
 	@Override
-	public boolean Insert(Photo photo) {
+	public int Insert(Photo photo) {
 		ContentValues values;
 		long result;
 		connection = DB.getWritableDatabase();
@@ -88,14 +90,19 @@ public class PhotoDB implements IPhotoDal {
 		values.put("DATE", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
 		result = connection.insert(TABLE, null, values);
+
+		String selectQuery = "SELECT  last_insert_rowid() ID";
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+
+		int id = cursor.getInt(cursor.getColumnIndex("ID"));
 		connection.close();
 
-		if(result == -1) {
-			return  false;
-		}
-		else {
-			return true;
-		}
+		return  id;
 	}
 
 	@Override

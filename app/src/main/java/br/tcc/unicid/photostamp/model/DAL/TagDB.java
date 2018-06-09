@@ -31,13 +31,36 @@ public class TagDB implements ITagDal {
 
 		Cursor cursor = connection.rawQuery(selectQuery, null);
 
+		Tag tag = new Tag();
 		if (cursor != null) {
-			cursor.moveToFirst();
+			if (cursor.moveToFirst()) {
+				tag.setID(cursor.getInt(cursor.getColumnIndex("ID")));
+				tag.setID(id);
+				tag.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+			}
 		}
+		connection.close();
+
+		return tag;
+	}
+
+	@Override
+	public Tag GetByName(String name) {
+		connection = DB.getReadableDatabase();
+
+		String selectQuery = "SELECT  * FROM " + TABLE + " WHERE NAME = '" + name + "'";
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
 
 		Tag tag = new Tag();
-		tag.setID(id);
-		tag.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				tag.setID(cursor.getInt(cursor.getColumnIndex("ID")));
+				tag.setName(name);
+			}
+		}
+
+		connection.close();
 
 		return tag;
 	}
@@ -60,12 +83,13 @@ public class TagDB implements ITagDal {
 				tags.add(t);
 			} while (cursor.moveToNext());
 		}
+		connection.close();
 
 		return tags;
 	}
 
 	@Override
-	public boolean Insert(Tag tag) {
+	public int Insert(Tag tag) {
 		ContentValues values;
 		long result;
 		connection = DB.getWritableDatabase();
@@ -75,14 +99,19 @@ public class TagDB implements ITagDal {
 		values.put("DATE", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
 		result = connection.insert(TABLE, null, values);
+
+		String selectQuery = "SELECT  last_insert_rowid() ID";
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+
+		int id = cursor.getInt(cursor.getColumnIndex("ID"));
 		connection.close();
 
-		if(result == -1) {
-			return  false;
-		}
-		else {
-			return true;
-		}
+		return id;
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public interface IPhotoDal {
 
 	ArrayList<Photo> Get();
 
-	boolean Insert(Photo photo);
+	int Insert(Photo photo);
 
 	boolean Delete(int id);
 

@@ -62,6 +62,7 @@ import br.tcc.unicid.photostamp.model.BLL.TagBll;
 import br.tcc.unicid.photostamp.model.BLL.UserBll;
 import br.tcc.unicid.photostamp.model.DTO.Grid;
 import br.tcc.unicid.photostamp.model.DTO.Photo;
+import br.tcc.unicid.photostamp.model.DTO.Tag;
 import br.tcc.unicid.photostamp.module.UserModule;
 
 public class HomeActivity extends AppCompatActivity
@@ -74,11 +75,14 @@ public class HomeActivity extends AppCompatActivity
     @Inject
     EventBll eventBll;
 
-    private  ImageView imagem;
+    private ImageView imagem;
     private final int TIRAR_FOTO = 1;
     private LinearLayout linearLayout;
     private AutoCompleteTextView complete;
     private int index = 0;
+    private Button button;
+    private int photoID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +110,29 @@ public class HomeActivity extends AppCompatActivity
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, TIRAR_FOTO);
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, TIRAR_FOTO);
+            }
+            }
+        });
+
+        button = findViewById(R.id.slvFotos);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < linearLayout.getChildCount()-1; i++) {
+                    Chip chip = (Chip) linearLayout.getChildAt(i);
+                    String texto = chip.getChipText();
+                    Tag tag = new Tag();
+                    tag.setName(texto);
+                    tag = tagBll.GetByName(texto);
+                    if(tag.getID() == 0) {
+                        tag.setName(texto);
+                        tag.setID(tagBll.Insert(tag));
+                    }
+
+                    photoBll.UpdateTag(photoID, tag);
                 }
             }
         });
@@ -119,13 +143,10 @@ public class HomeActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == TIRAR_FOTO & resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            photoBll.Insert((Bitmap) extras.get("data"));
-            ArrayList<Photo> photos = photoBll.Get();
+            photoID = photoBll.Insert((Bitmap) extras.get("data"));
             String[] tags = tagBll.Get();
 
-            ByteArrayInputStream imageStream = new ByteArrayInputStream(photos.get(photos.size() - 1).getImage());
-            Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
-            imagem.setImageBitmap(imageBitmap);
+            imagem.setImageBitmap((Bitmap) extras.get("data"));
 
             complete = findViewById(R.id.autocomplete);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tags);
@@ -167,10 +188,12 @@ public class HomeActivity extends AppCompatActivity
 
     private void AddChip()
     {
-        if(complete.getText().toString() != "") {
+        if(!complete.getText().toString().equals("")) {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0, 16, 0, 0);
             Chip chip = new Chip(getApplicationContext());
-            chip.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            chip.setLayoutParams(layoutParams);
             chip.setClosable(true);
             chip.setChipText(complete.getText().toString());
             chip.setOnCloseClickListener(new OnCloseClickListener() {

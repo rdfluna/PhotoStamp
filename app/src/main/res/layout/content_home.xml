@@ -87,7 +87,6 @@
         android:id="@+id/layoutTag"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:orientation="horizontal"
@@ -99,10 +98,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:maxLines="1"
             android:imeOptions="actionGo"
-            app:layout_constraintVertical_bias="1.0"/>
+            android:maxLines="1"
+            app:layout_constraintVertical_bias="1.0" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

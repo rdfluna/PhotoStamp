@@ -17,6 +17,10 @@ public class TagBll {
 		return Dal.GetByID(id);
 	}
 
+	public Tag GetByName(String name) {
+		return Dal.GetByName(name);
+	}
+
 	public String[] Get() {
 		ArrayList<Tag> tags = Dal.Get();
 		String[] tagsString = new String[tags.size()];
@@ -29,7 +33,7 @@ public class TagBll {
 		//return  tagsString;
 	}
 
-	public boolean Insert(Tag tag) {
+	public int Insert(Tag tag) {
 		return Dal.Insert(tag);
 	}
 
