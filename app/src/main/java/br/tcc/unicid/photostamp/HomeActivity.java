@@ -75,14 +75,11 @@ public class HomeActivity extends AppCompatActivity
     @Inject
     EventBll eventBll;
 
-    private ImageView imagem;
     private final int TIRAR_FOTO = 1;
-    private LinearLayout linearLayout;
     private AutoCompleteTextView complete;
+    private LinearLayout linearLayout;
     private int index = 0;
-    private Button button;
     private int photoID;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +102,8 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        imagem = (ImageView) findViewById(R.id.imFotos);
+        FillAutoComplete();
+
         Button foto = (Button) findViewById(R.id.btnFotos);
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,10 +115,11 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
-        button = findViewById(R.id.slvFotos);
+        Button button = findViewById(R.id.slvFotos);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                photoBll.DeleteTag(photoID);
                 for (int i = 0; i < linearLayout.getChildCount()-1; i++) {
                     Chip chip = (Chip) linearLayout.getChildAt(i);
                     String texto = chip.getChipText();
@@ -131,71 +130,95 @@ public class HomeActivity extends AppCompatActivity
                         tag.setName(texto);
                         tag.setID(tagBll.Insert(tag));
                     }
-
                     photoBll.UpdateTag(photoID, tag);
                 }
+                Intent it = new Intent(HomeActivity.this, PhotoActivity.class);
+                startActivity(it);
             }
         });
+
+        if(getIntent().getIntExtra("id", 0) != 0) {
+            FillImage(getIntent());
+        }
+        else if(getIntent().getExtras() != null && getIntent().getExtras().get("data") != null) {
+            FillImage(getIntent());
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == TIRAR_FOTO & resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            photoID = photoBll.Insert((Bitmap) extras.get("data"));
-            String[] tags = tagBll.Get();
-
-            imagem.setImageBitmap((Bitmap) extras.get("data"));
-
-            complete = findViewById(R.id.autocomplete);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tags);
-            complete.setAdapter(adapter);
-            complete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                    AddChip();
-                }
-
-            });
-            complete.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(s.toString().contains("\n")) {
-                        complete.setText(s.toString().replace("\n", ""));
-                        AddChip();
-                    }
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
+            FillImage(data);
         }
     }
 
     //onclick do menu login para entrar no sistema
+    private void FillImage(Intent data) {
+        int id = data.getIntExtra("id", 0);
+        ImageView imagem = (ImageView) findViewById(R.id.imFotos);
+        if(id == 0) {
+            Bundle extras = data.getExtras();
+            photoID = photoBll.Insert((Bitmap) extras.get("data"));
+            imagem.setImageBitmap((Bitmap) extras.get("data"));
+        }
+        else {
+            photoID = id;
+            Photo photo = photoBll.GetByID(photoID);
+            ByteArrayInputStream imageStream = new ByteArrayInputStream(photo.getImage());
+            Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
+            imagem.setImageBitmap(imageBitmap);
+            ArrayList<Tag> tags = tagBll.GetByPhotoID(photoID);
+            for (int i = 0; i < tags.size(); i++) {
+                AddChip(tags.get(i).getName());
+            }
+        }
+    }
+
     public void Login (View view){
         setContentView(R.layout.activity_login_user);
     }
 
-    private void AddChip()
-    {
-        if(!complete.getText().toString().equals("")) {
+    private void FillAutoComplete() {
+        String[] tags = tagBll.Get();
+        complete = findViewById(R.id.autocomplete);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tags);
+        complete.setAdapter(adapter);
+        complete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                AddChip(complete.getText().toString());
+            }
+
+        });
+        complete.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().contains("\n")) {
+                    AddChip(s.toString().replace("\n", ""));
+                    complete.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+    }
+
+    private void AddChip(String text) {
+        if(!text.equals("")) {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(0, 16, 0, 0);
             Chip chip = new Chip(getApplicationContext());
             chip.setLayoutParams(layoutParams);
             chip.setClosable(true);
-            chip.setChipText(complete.getText().toString());
+            chip.setChipText(text);
             chip.setOnCloseClickListener(new OnCloseClickListener() {
                 @Override
                 public void onCloseClick(View v) {
@@ -205,7 +228,6 @@ public class HomeActivity extends AppCompatActivity
                     index--;
                 }
             });
-            complete.setText("");
             linearLayout.addView(chip, index++);
         }
     }
@@ -249,7 +271,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent it = new Intent(HomeActivity.this, HomeActivity.class);
+            Intent it = new Intent(HomeActivity.this, PhotoActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_gallery) {
             Intent it = new Intent(HomeActivity.this, TagActivity.class);

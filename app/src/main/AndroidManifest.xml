@@ -25,6 +25,7 @@
         <activity android:name=".SingUpActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".TagActivity" />
+        <activity android:name=".PhotoActivity" />
         <activity android:name=".ThemeActivity" />
         <activity android:name=".GridActivity" />
         <activity android:name=".GalleryWallActivity" />

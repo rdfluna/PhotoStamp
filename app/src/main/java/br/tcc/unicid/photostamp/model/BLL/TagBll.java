@@ -17,6 +17,10 @@ public class TagBll {
 		return Dal.GetByID(id);
 	}
 
+	public ArrayList<Tag> GetByPhotoID(int id) {
+		return Dal.GetByPhotoID(id);
+	}
+
 	public Tag GetByName(String name) {
 		return Dal.GetByName(name);
 	}
@@ -29,8 +33,7 @@ public class TagBll {
 			tagsString[i] = tags.get(i).getName();
 		}
 
-		return new String[]{"Carro", "Coelho", "Show", "Viagem"};
-		//return  tagsString;
+		return  tagsString;
 	}
 
 	public int Insert(Tag tag) {

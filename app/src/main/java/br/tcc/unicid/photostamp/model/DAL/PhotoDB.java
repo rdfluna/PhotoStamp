@@ -25,6 +25,24 @@ public class PhotoDB implements IPhotoDal {
 	}
 
 	@Override
+	public int GetTotal() {
+		connection = DB.getReadableDatabase();
+		int total = 0;
+		String selectQuery = "SELECT  COUNT(*) TOTAL FROM " + TABLE;
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				total = cursor.getInt(cursor.getColumnIndex("TOTAL"));
+			}
+		}
+		connection.close();
+
+		return total;
+	}
+
+	@Override
 	public Photo GetByID(int id) {
 		connection = DB.getReadableDatabase();
 
@@ -46,6 +64,78 @@ public class PhotoDB implements IPhotoDal {
 		connection.close();
 
 		return photo;
+	}
+
+	@Override
+	public Photo GetByPosition(int position) {
+		connection = DB.getReadableDatabase();
+
+		String selectQuery = "SELECT  * FROM " + TABLE + " LIMIT 1 OFFSET " + position;
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		Photo photo = new Photo();
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				photo.setID(cursor.getInt(cursor.getColumnIndex("ID")));
+				photo.setExtention(cursor.getString(cursor.getColumnIndex("EXTENTION")));
+				photo.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+				photo.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
+				photo.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
+				photo.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
+			}
+		}
+		connection.close();
+
+		return photo;
+	}
+
+	@Override
+	public Photo GetWithoutTagByPosition(int position) {
+		connection = DB.getReadableDatabase();
+
+		String selectQuery = "SELECT P.* FROM " + TABLE + " P " +
+				"LEFT JOIN PHOTOTAG PT ON P.ID = PT.PHOTOID " +
+				"WHERE PT.ID IS NULL " +
+				"LIMIT 1 OFFSET " + position;
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		Photo photo = new Photo();
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				photo.setID(cursor.getInt(cursor.getColumnIndex("ID")));
+				photo.setExtention(cursor.getString(cursor.getColumnIndex("EXTENTION")));
+				photo.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+				photo.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
+				photo.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
+				photo.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
+			}
+		}
+		connection.close();
+
+		return photo;
+	}
+
+	@Override
+	public int GetTotalWithoutTag() {
+		connection = DB.getReadableDatabase();
+		int total = 0;
+
+		String selectQuery = "SELECT COUNT(*) TOTAL FROM " + TABLE + " P " +
+				"LEFT JOIN PHOTOTAG PT ON P.ID = PT.PHOTOID " +
+				"WHERE PT.ID IS NULL ";
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				total = cursor.getInt(cursor.getColumnIndex("TOTAL"));
+			}
+		}
+		connection.close();
+
+		return total;
 	}
 
 	@Override
@@ -136,6 +226,19 @@ public class PhotoDB implements IPhotoDal {
 		}
 		else {
 			return true;
+		}
+	}
+
+	@Override
+	public boolean DeleteTag(int id) {
+		connection = DB.getReadableDatabase();
+		int result = connection.delete("PHOTOTAG", "PHOTOID = " + id,null);
+		connection.close();
+		if(result != -1) {
+			return  true;
+		}
+		else {
+			return false;
 		}
 	}
 }

@@ -9,6 +9,8 @@ public interface ITagDal {
 
 	Tag GetByName(String name);
 
+	ArrayList<Tag> GetByPhotoID(int id);
+
 	ArrayList<Tag> Get();
 
 	int Insert(Tag tag);

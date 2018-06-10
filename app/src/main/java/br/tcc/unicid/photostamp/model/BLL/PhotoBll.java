@@ -18,8 +18,24 @@ public class PhotoBll {
 		this.Dal = dal;
 	}
 
+	public int GetTotal() {
+		return Dal.GetTotal();
+	}
+
 	public Photo GetByID(int id) {
 		return Dal.GetByID(id);
+	}
+
+	public Photo GetByPosition(int position) {
+		return Dal.GetByPosition(position);
+	}
+
+	public Photo GetWithoutTagByPosition(int position) {
+		return Dal.GetWithoutTagByPosition(position);
+	}
+
+	public int GetTotalWithoutTag() {
+		return Dal.GetTotalWithoutTag();
 	}
 
 	public ArrayList<Photo> Get() {
@@ -48,5 +64,9 @@ public class PhotoBll {
 
 	public boolean UpdateTag(int id, Tag tag) {
 		return Dal.UpdateTag(id, tag);
+	}
+
+	public boolean DeleteTag(int id) {
+		return Dal.DeleteTag(id);
 	}
 }

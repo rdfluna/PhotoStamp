@@ -34,7 +34,6 @@ public class TagDB implements ITagDal {
 		Tag tag = new Tag();
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
-				tag.setID(cursor.getInt(cursor.getColumnIndex("ID")));
 				tag.setID(id);
 				tag.setName(cursor.getString(cursor.getColumnIndex("NAME")));
 			}
@@ -63,6 +62,31 @@ public class TagDB implements ITagDal {
 		connection.close();
 
 		return tag;
+	}
+
+	@Override
+	public ArrayList<Tag> GetByPhotoID(int id) {
+		connection = DB.getReadableDatabase();
+
+		String selectQuery = "SELECT T.* FROM " + TABLE + " T " +
+				"INNER JOIN PHOTOTAG PT ON T.ID = PT.TAGID " +
+				"WHERE PT.PHOTOID = " + id + " ";
+
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		ArrayList<Tag> tags = new ArrayList<Tag>();
+		if (cursor != null && cursor.moveToFirst()) {
+			do {
+				Tag t = new Tag();
+				t.setID(id);
+				t.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+
+				tags.add(t);
+			} while (cursor.moveToNext());
+		}
+		connection.close();
+
+		return tags;
 	}
 
 	@Override
