@@ -104,16 +104,31 @@ public class HomeActivity extends AppCompatActivity
 
         FillAutoComplete();
 
-        Button foto = (Button) findViewById(R.id.btnFotos);
-        foto.setOnClickListener(new View.OnClickListener() {
+//
+
+        //  botton FloatingAction Menu
+        FloatingActionButton fabPhoto = (FloatingActionButton) findViewById(R.id.fabPhoto);
+        fabPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, TIRAR_FOTO);
-            }
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, TIRAR_FOTO);
+                }
             }
         });
+
+//        //  botton FloatingAction photo_check
+//        FloatingActionButton fabCheck = (FloatingActionButton) findViewById(R.id.fabCheck);
+//        fabCheck.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//                    startActivityForResult(takePictureIntent, TIRAR_FOTO);
+//                }
+//            }
+//        });
 
         Button button = findViewById(R.id.slvFotos);
         button.setOnClickListener(new View.OnClickListener() {
@@ -263,6 +278,9 @@ public class HomeActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

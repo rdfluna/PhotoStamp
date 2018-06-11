@@ -31,7 +31,7 @@
         <activity android:name=".GalleryWallActivity" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_tela_menu"
+            android:label="Principal"
             android:theme="@style/AppTheme.NoActionBar"
             />
     </application>

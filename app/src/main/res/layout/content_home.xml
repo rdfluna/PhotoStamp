@@ -28,22 +28,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnFotos"
-        android:layout_width="58dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="15dp"
-        android:background="#fff"
-        android:drawableBottom="@drawable/ic_add_a_photo_black_24dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutTag" />
+    <!--<Button-->
+        <!--android:id="@+id/btnFotos"-->
+        <!--android:layout_width="58dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_marginBottom="33dp"-->
+        <!--android:layout_marginEnd="160dp"-->
+        <!--android:layout_marginStart="160dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:background="#fff"-->
+        <!--android:drawableBottom="@drawable/ic_add_a_photo_black_24dp"-->
+        <!--android:visibility="visible"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="1.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/layoutTag" />-->
 
     <Button
         android:id="@+id/slvFotos"
@@ -59,10 +59,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutTag"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/layoutTag"
@@ -84,4 +84,15 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabPhoto"
+        android:layout_width="81dp"
+        android:layout_height="57dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="455dp" />
 </android.support.constraint.ConstraintLayout>

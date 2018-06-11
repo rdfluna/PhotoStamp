@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import br.tcc.unicid.photostamp.contract.AppComponent;
-//import br.tcc.unicid.photostamp.contract.DaggerAppComponent;
+import br.tcc.unicid.photostamp.contract.DaggerAppComponent;
 import br.tcc.unicid.photostamp.model.BLL.EventBll;
 import br.tcc.unicid.photostamp.model.BLL.PhotoBll;
 import br.tcc.unicid.photostamp.model.BLL.UserBll;
@@ -78,16 +78,16 @@ public class Home extends AppCompatActivity
 
 
         imagem = (ImageView) findViewById(R.id.imFotos);
-        Button foto = (Button) findViewById(R.id.btnFotos);
-        foto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, TIRAR_FOTO);
-                }
-            }
-        });
+//        Button foto = (Button) findViewById(R.id.btnFotos);
+//        foto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//                    startActivityForResult(takePictureIntent, TIRAR_FOTO);
+//                }
+//            }
+//        });
 
     }
 

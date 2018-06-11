@@ -16,4 +16,15 @@
        android:stretchMode="columnWidth"
        android:gravity="center"
    />
+
+   <!--<android.support.design.widget.FloatingActionButton-->
+       <!--android:id="@+id/fabCheck"-->
+       <!--android:layout_width="81dp"-->
+       <!--android:layout_height="57dp"-->
+       <!--android:layout_gravity="bottom|end"-->
+       <!--android:layout_margin="@dimen/fab_margin"-->
+       <!--app:srcCompat="@android:drawable/ic_menu_camera"-->
+       <!--tools:ignore="MissingConstraints"-->
+       <!--tools:layout_editor_absoluteX="39dp"-->
+       <!--tools:layout_editor_absoluteY="455dp" />-->
 </android.support.constraint.ConstraintLayout>
