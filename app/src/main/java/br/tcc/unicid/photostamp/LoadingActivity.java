@@ -19,7 +19,7 @@ public class LoadingActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                Intent homeIntent = new Intent(LoadingActivity.this, HomeActivity.class);
+                Intent homeIntent = new Intent(LoadingActivity.this, PhotoActivity.class);
                 startActivity(homeIntent);
                 finish();
             }

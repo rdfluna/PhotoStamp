@@ -3,6 +3,9 @@ package br.tcc.unicid.photostamp;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -104,20 +108,6 @@ public class HomeActivity extends AppCompatActivity
 
         FillAutoComplete();
 
-//
-
-        //  botton FloatingAction Menu
-        FloatingActionButton fabPhoto = (FloatingActionButton) findViewById(R.id.fabPhoto);
-        fabPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, TIRAR_FOTO);
-                }
-            }
-        });
-
 //        //  botton FloatingAction photo_check
 //        FloatingActionButton fabCheck = (FloatingActionButton) findViewById(R.id.fabCheck);
 //        fabCheck.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +169,8 @@ public class HomeActivity extends AppCompatActivity
         }
         else {
             photoID = id;
+            complete.setHint("");
+            complete.requestFocus();
             Photo photo = photoBll.GetByID(photoID);
             ByteArrayInputStream imageStream = new ByteArrayInputStream(photo.getImage());
             Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
@@ -199,11 +191,28 @@ public class HomeActivity extends AppCompatActivity
         complete = findViewById(R.id.autocomplete);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tags);
         complete.setAdapter(adapter);
+        complete.requestFocus();
         complete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 AddChip(complete.getText().toString());
+                complete.setHint("");
+                complete.setText("");
+
+                NotificationManager notif = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                PendingIntent contentIntent = PendingIntent.getActivity(HomeActivity.this, 0, new Intent(HomeActivity.this, TagActivity.class), 0);
+                Notification notify = new Notification.Builder
+                        (getApplicationContext())
+                        .setContentText("Não deixe de marcar suas fotos!")
+                        .setContentTitle("Fotos pendentes")
+                        .setSmallIcon(R.drawable.ic_menu_camera)
+                        .setContentIntent(contentIntent)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .build();
+
+                notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                notif.notify(0, notify);
             }
 
         });
@@ -216,6 +225,7 @@ public class HomeActivity extends AppCompatActivity
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.toString().contains("\n")) {
                     AddChip(s.toString().replace("\n", ""));
+                    complete.setHint("");
                     complete.setText("");
                 }
             }
