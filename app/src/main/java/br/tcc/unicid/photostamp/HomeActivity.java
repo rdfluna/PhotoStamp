@@ -89,6 +89,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         linearLayout = findViewById(R.id.layoutTag);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -148,7 +149,13 @@ public class HomeActivity extends AppCompatActivity
         else if(getIntent().getExtras() != null && getIntent().getExtras().get("data") != null) {
             FillImage(getIntent());
         }
+
+
     }
+
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
