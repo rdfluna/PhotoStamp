@@ -48,6 +48,7 @@ public class TagActivity extends AppCompatActivity implements NavigationView.OnN
         setContentView(R.layout.activity_photo);
 
         Toolbar toolbar = findViewById(R.id.toolbar2);
+        toolbar.setTitle("Pendentes");
         setSupportActionBar(toolbar);
 
         MainApplication.getComponent().inject(this);

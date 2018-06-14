@@ -42,6 +42,15 @@ public class PhotoBll {
 		return Dal.Get();
 	}
 
+	public ArrayList<Photo> Get(ArrayList<Tag> tags, boolean desc, boolean orderDate) {
+		String[] tagsID = new String[tags.size()];
+
+		for (int i = 0; i < tags.size(); i++) {
+			tagsID[i] = String.valueOf(tags.get(i).getID());
+		}
+
+		return Dal.Get(tagsID, desc, orderDate);
+	}
 
 	public int Insert(Bitmap imageBitmap) {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();

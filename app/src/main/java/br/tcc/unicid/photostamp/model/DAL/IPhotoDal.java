@@ -17,6 +17,8 @@ public interface IPhotoDal {
 
 	ArrayList<Photo> Get();
 
+	ArrayList<Photo> Get(String[] tagsID, boolean desc, boolean orderDate);
+
 	int Insert(Photo photo);
 
 	boolean Delete(int id);

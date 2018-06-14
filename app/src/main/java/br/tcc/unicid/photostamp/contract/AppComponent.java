@@ -7,6 +7,7 @@ import br.tcc.unicid.photostamp.Home;
 import br.tcc.unicid.photostamp.HomeActivity;
 import br.tcc.unicid.photostamp.LoginActivity;
 import br.tcc.unicid.photostamp.PhotoActivity;
+import br.tcc.unicid.photostamp.ProcessTimerReceiver;
 import br.tcc.unicid.photostamp.SingUpActivity;
 import br.tcc.unicid.photostamp.TagActivity;
 import br.tcc.unicid.photostamp.ThemeActivity;
@@ -47,6 +48,7 @@ public interface AppComponent {
     public void inject(TagActivity activity);
     public void inject(ThemeActivity activity);
     public void inject(PhotoActivity activity);
+    public void inject(ProcessTimerReceiver timer);
 
     void inject(Home home);
 }

@@ -34,6 +34,12 @@
             android:label="Principal"
             android:theme="@style/AppTheme.NoActionBar"
             />
+        <receiver android:name=".ProcessTimerReceiver" >
+            <intent-filter>
+                <action android:name="processTimer" >
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

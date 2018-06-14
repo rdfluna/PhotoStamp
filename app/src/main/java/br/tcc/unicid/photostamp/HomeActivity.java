@@ -2,6 +2,7 @@ package br.tcc.unicid.photostamp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -150,7 +151,12 @@ public class HomeActivity extends AppCompatActivity
             FillImage(getIntent());
         }
 
-
+        int repeatTime = 30;  //Repeat alarm time in seconds
+        AlarmManager processTimer = (AlarmManager)getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(this, ProcessTimerReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,  intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//Repeat alarm every second
+        processTimer.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),repeatTime*1000, pendingIntent);
     }
 
 
@@ -207,19 +213,19 @@ public class HomeActivity extends AppCompatActivity
                 complete.setHint("");
                 complete.setText("");
 
-                NotificationManager notif = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                PendingIntent contentIntent = PendingIntent.getActivity(HomeActivity.this, 0, new Intent(HomeActivity.this, TagActivity.class), 0);
-                Notification notify = new Notification.Builder
-                        (getApplicationContext())
-                        .setContentText("Não deixe de marcar suas fotos!")
-                        .setContentTitle("Fotos pendentes")
-                        .setSmallIcon(R.drawable.ic_menu_camera)
-                        .setContentIntent(contentIntent)
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                        .build();
-
-                notify.flags |= Notification.FLAG_AUTO_CANCEL;
-                notif.notify(0, notify);
+                //NotificationManager notif = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                //PendingIntent contentIntent = PendingIntent.getActivity(HomeActivity.this, 0, new Intent(HomeActivity.this, TagActivity.class), 0);
+                //Notification notify = new Notification.Builder
+                //        (getApplicationContext())
+                //        .setContentText("Não deixe de marcar suas fotos!")
+                //        .setContentTitle("Fotos pendentes")
+                //        .setSmallIcon(R.drawable.ic_menu_camera)
+                //        .setContentIntent(contentIntent)
+                //        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                //        .build();
+//
+                //notify.flags |= Notification.FLAG_AUTO_CANCEL;
+                //notif.notify(0, notify);
             }
 
         });

@@ -166,6 +166,62 @@ public class PhotoDB implements IPhotoDal {
 	}
 
 	@Override
+	public ArrayList<Photo> Get(String[] tagsID, boolean desc, boolean orderDate) {
+		ArrayList<Photo> photos = new ArrayList<Photo>();
+		String inClause = "";
+
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < tagsID.length; i++) {
+			if (i != 0) {
+				result.append(",");
+			}
+			result.append("'" + tagsID[i] + "'");
+		}
+		inClause = result.toString();
+
+		String selectQuery = "SELECT DISTINCT P.* FROM " + TABLE + " P " +
+				"LEFT JOIN PHOTOTAG PT ON P.ID = PT.PHOTOID " +
+				"WHERE PT.ID IN (" + inClause + ") ";
+		if(desc) {
+			if (orderDate) {
+				selectQuery += "ORDER BY DATE DESC ";
+			}
+			else {
+				selectQuery += "ORDER BY DATE ASC ";
+			}
+		}
+		else {
+			if (orderDate) {
+				selectQuery += "ORDER BY NAME DESC ";
+			}
+			else {
+				selectQuery += "ORDER BY NAME ASC ";
+			}
+		}
+
+		SQLiteDatabase connection = DB.getReadableDatabase();
+		Cursor cursor = connection.rawQuery(selectQuery, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				Photo ph = new Photo();
+				ph.setID(cursor.getInt(cursor.getColumnIndex("ID")));
+				ph.setExtention(cursor.getString(cursor.getColumnIndex("EXTENTION")));
+				ph.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+				ph.setPath(cursor.getString(cursor.getColumnIndex("PATH")));
+				ph.setSize(cursor.getInt(cursor.getColumnIndex("SIZE")));
+				ph.setImage(cursor.getBlob(cursor.getColumnIndex("IMAGE")));
+
+				photos.add(ph);
+			} while (cursor.moveToNext());
+		}
+		connection.close();
+
+		return photos;
+	}
+
+	@Override
 	public int Insert(Photo photo) {
 		ContentValues values;
 		long result;
