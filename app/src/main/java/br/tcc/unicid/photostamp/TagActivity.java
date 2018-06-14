@@ -46,6 +46,8 @@ public class TagActivity extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+        findViewById(R.id.layoutTag).setVisibility(View.GONE);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar2);
         toolbar.setTitle("Pendentes");
@@ -76,6 +78,7 @@ public class TagActivity extends AppCompatActivity implements NavigationView.OnN
 
         //grid view
         final GridView gridView = findViewById(R.id.gridView);
+        gridView.setPadding(0, 90, 0, 0);
         gridView.setAdapter(new ImageAdapter(this));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){

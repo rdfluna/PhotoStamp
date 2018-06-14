@@ -181,7 +181,7 @@ public class PhotoDB implements IPhotoDal {
 
 		String selectQuery = "SELECT DISTINCT P.* FROM " + TABLE + " P " +
 				"LEFT JOIN PHOTOTAG PT ON P.ID = PT.PHOTOID " +
-				"WHERE PT.ID IN (" + inClause + ") ";
+				"WHERE PT.TAGID IN (" + inClause + ") ";
 		if(desc) {
 			if (orderDate) {
 				selectQuery += "ORDER BY DATE DESC ";
