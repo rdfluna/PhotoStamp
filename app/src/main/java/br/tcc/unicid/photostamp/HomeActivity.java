@@ -196,7 +196,8 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void Login (View view){
-        setContentView(R.layout.activity_login_user);
+        Intent it = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(it);
     }
 
     private void FillAutoComplete() {

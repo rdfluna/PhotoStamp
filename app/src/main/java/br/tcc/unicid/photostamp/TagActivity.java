@@ -101,7 +101,8 @@ public class TagActivity extends AppCompatActivity implements NavigationView.OnN
     }
 
     public void Login (View view){
-        setContentView(R.layout.activity_login_user);
+        Intent it = new Intent(TagActivity.this, LoginActivity.class);
+        startActivity(it);
     }
 
     @Override

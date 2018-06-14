@@ -148,7 +148,6 @@ public class PhotoActivity extends AppCompatActivity implements NavigationView.O
         complete = findViewById(R.id.autocomplete);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tags);
         complete.setAdapter(adapter);
-        complete.requestFocus();
         complete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -204,7 +203,8 @@ public class PhotoActivity extends AppCompatActivity implements NavigationView.O
     }
 
     public void Login (View view){
-        setContentView(R.layout.activity_login_user);
+        Intent it = new Intent(PhotoActivity.this, LoginActivity.class);
+        startActivity(it);
     }
 
     @Override

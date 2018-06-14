@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:layout_marginLeft="12dp"
+        android:onClick="Login"
         android:text="Login"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
